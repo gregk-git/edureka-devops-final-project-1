@@ -1,65 +1,33 @@
 ---
-
 - name: Deploy HTML to test servers
-
   hosts: test
-
   remote_user: ansadmin
 
-
-
   tasks:
-
   - name: Install git and docker
-
 	yum : name={{item}} state=present
-
 	loop:
-
 	- docker
-
 	- git
 
-
-
   - name: Ensure docker is at the latest version
-
     ansible.builtin.yum:
-
       name: docker
-
       state: latest
 
-
-
   - name: Start docker
-
 	service: name=docker state=started
 
-
-
   - name: Clone the repo
-
   	git: repo=https://github.com/gregk-git/module-3-Git-And-Jenkins-assignment-1 dest=/tmp/gitrepo
-
 	
-
   - name: Deploy nginx docker with web files
-
       docker_container:
-
         image: nginx:stable
-
         name: nginx
-
         state: started
-
         auto_remove: true
-
         ports:
-
           - "80:80"
-
 		volume:
-
 		  - /tmp/gitrepo/:/var/www/html
