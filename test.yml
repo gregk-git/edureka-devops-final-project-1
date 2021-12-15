@@ -65,6 +65,8 @@
       ports:
         - "80:80"
       volumes:
-        - /tmp/gitrepo/:/usr/share/nginx/www
+        - /tmp/gitrepo/:/usr/share/nginx/html:ro
+        #- /home/ansadmin/git-test/module-3-Git-And-Jenkins-assignment-1:/usr/share/nginx/html:ro
+        #- /tmp/gitrepo/:/usr/share/nginx/www
       #volumes:
         #- /tmp/gitrepo/:/var/www/html
